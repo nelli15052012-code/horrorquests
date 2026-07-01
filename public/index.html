@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Страшные переписки</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body data-wallpaper="night">
+  <div class="page-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand__logo">👻</div>
+        <div>
+          <h1>Темные переписки</h1>
+          <p>Сайт хоррор-квестов и тайных чатов</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-link active" data-page="home">Главная</button>
+        <button class="nav-link" data-page="about">Кто мы</button>
+        <button class="nav-link" data-page="booking">Записаться</button>
+        <button class="nav-link" data-page="messenger">Мессенджер</button>
+        <button class="nav-link" data-page="actor" id="actorLink" hidden>Актёрам</button>
+        <button class="nav-link" data-page="admin" id="adminLink" hidden>Админка</button>
+      </nav>
+
+      <div class="status-card" id="statusCard">
+        <h2>Статус</h2>
+        <p id="statusText">Не авторизованы</p>
+        <div class="notification-list" id="notificationList"></div>
+        <div class="status-actions">
+          <button id="loginButton" class="button button--ghost">Войти</button>
+          <button id="logoutButton" class="button button--ghost" hidden>Выйти</button>
+        </div>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="page active" id="home">
+        <div class="hero">
+          <h2>Живая переписка с сюжетом</h2>
+          <p>Ты — главный герой. Наслаждайся страшным квестом, общайся с персонажами и готовься к неизвестности.</p>
+          <div class="hero-actions">
+            <button class="button" data-page="booking">Записаться на квест</button>
+            <button class="button button--ghost" data-page="messenger">Открыть мессенджер</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="about">
+        <h2>Кто мы</h2>
+        <p>Мы делаем «страшные переписки» — интерактивные истории, где текстовая переписка становится квестом. У нас есть актеры, которые отыгрывают роли, и главный герой — ты.</p>
+        <div class="features-grid">
+          <div class="feature-card">
+            <h3>Сюжетные переписки</h3>
+            <p>Каждая сессия — это история с миссиями, тайнами и неожиданными поворотами.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Запись на квест</h3>
+            <p>Выбирай время, сценарий и готовься к открытому мессенджеру во время игры.</p>
+          </div>
+          <div class="feature-card">
+            <h3>Скрытый раздел</h3>
+            <p>Актерам доступна отдельная комната, полностью закрытая для игроков.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="booking">
+        <h2>Записаться на квест</h2>
+        <div class="panel">
+          <p>Чтобы получить доступ к мессенджеру, зарегистрируйся и запишись на сеанс. Мессенджер откроется за 4 часа до записи или сразу после приглашения администратора.</p>
+          <form id="bookingForm" class="form-grid">
+            <label>
+              Ваш никнейм
+              <input type="text" id="bookingName" placeholder="Например, Артём" />
+            </label>
+            <label>
+              Сценарий
+              <select id="scenarioSelect">
+                <option value="Похищение">Похищение</option>
+                <option value="Ночной эксперимент">Ночной эксперимент</option>
+                <option value="Заброшенная группа">Заброшенная группа</option>
+              </select>
+            </label>
+            <label>
+              Дата и время
+              <input type="datetime-local" id="bookingDate" />
+            </label>
+            <label>
+              Комментарий
+              <textarea id="bookingComment" rows="4" placeholder="Расскажи, что хочешь увидеть..."></textarea>
+            </label>
+            <button type="submit" class="button">Отправить заявку</button>
+          </form>
+          <div class="note">Если вы не авторизованы, заявка будет привязана к зарегистрированному аккаунту после входа.</div>
+        </div>
+      </section>
+
+      <section class="page" id="messenger">
+        <h2>Мессенджер</h2>
+        <div class="panel" id="messengerPanel">
+          <div id="messengerAccess" class="alert alert--info">Зайдите в аккаунт, чтобы посмотреть доступ.</div>
+          <div id="messengerApp" class="messenger" hidden>
+            <div class="messenger__topbar">
+              <div>
+                <div class="badge" id="messengerRoleBadge">Игрок</div>
+                <div class="messenger__desc">Вы можете общаться с актёрами, когда доступ открыт.</div>
+              </div>
+              <div class="wallpaper-selector">
+                <label>Обои:</label>
+                <button type="button" class="wallpaper-button" data-wallpaper="night">Ночь</button>
+                <button type="button" class="wallpaper-button" data-wallpaper="red">Алое</button>
+                <button type="button" class="wallpaper-button" data-wallpaper="forest">Лес</button>
+              </div>
+            </div>
+            <div class="chat-shell">
+              <div id="messages" class="messages"></div>
+              <form id="chatForm" class="chat-form">
+                <input id="messageInput" type="text" placeholder="Отправьте сообщение..." autocomplete="off" maxlength="500" required />
+                <button type="submit" class="button">Отправить</button>
+              </form>
+            </div>
+          </div>
+          <div id="messengerLocked" class="alert alert--warning" hidden>
+            Доступ к мессенджеру откроется через 4 часа до записи или по приглашению администратора.
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="actor">
+        <h2>Скрытый раздел для актёров</h2>
+        <div class="panel" id="actorPanel">
+          <div class="alert alert--warning" id="actorLocked">Этот раздел доступен только актёрам и администраторам.</div>
+          <div id="actorContent" hidden>
+            <p>Добро пожаловать в актёрскую комнату. Здесь можно видеть записи игроков и обсуждать сюжет.</p>
+            <div class="board-card">
+              <h3>Активные записи</h3>
+              <ul id="actorBoard"></ul>
+            </div>
+            <div class="chat-shell chat-shell--actor">
+              <div id="actorMessages" class="messages"></div>
+              <form id="actorChatForm" class="chat-form">
+                <input id="actorMessageInput" type="text" placeholder="Сообщение в актёрский чат..." autocomplete="off" maxlength="500" required />
+                <button type="submit" class="button">Отправить</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="page" id="admin">
+        <h2>Админка</h2>
+        <div class="panel" id="adminPanel">
+          <div class="alert alert--warning" id="adminLocked">Этот раздел доступен только создателю сайта и администраторам.</div>
+          <div id="adminContent" hidden>
+            <div class="stats-grid" id="statsGrid"></div>
+            <div class="board-card">
+              <h3>Зарегистрированные пользователи</h3>
+              <ul id="usersList"></ul>
+            </div>
+            <div class="board-card">
+              <h3>Заявки на квест</h3>
+              <ul id="bookingsList"></ul>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div class="modal" id="authModal">
+    <div class="modal__content">
+      <h3>Вход или регистрация</h3>
+      <div class="auth-tabs">
+        <button class="tab-button active" data-tab="login">Войти</button>
+        <button class="tab-button" data-tab="register">Регистрация</button>
+      </div>
+      <form id="authForm" class="form-grid">
+        <label>
+          Никнейм
+          <input type="text" id="authUsername" required maxlength="30" />
+        </label>
+        <label>
+          Пароль
+          <input type="password" id="authPassword" required minlength="4" />
+        </label>
+        <button type="submit" class="button">Отправить</button>
+      </form>
+      <div id="authError" class="alert alert--error" hidden></div>
+      <button class="button button--ghost" id="authClose">Закрыть</button>
+    </div>
+  </div>
+
+  <script src="client.js"></script>
+</body>
+</html>
