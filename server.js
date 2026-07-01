@@ -775,7 +775,7 @@ wss.on('connection', (ws, req) => {
 });
 
 if (require.main === module) {
-  const host = process.env.HOST || 'localhost';
+  const host = process.env.HOST || '0.0.0.0';
   const port = Number(process.env.PORT) || 3000;
   server.listen(port, host, () => {
     console.log(`Horror chat quest site listening on http://${host}:${port}`);
