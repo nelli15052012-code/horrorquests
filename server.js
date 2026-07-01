@@ -775,7 +775,7 @@ wss.on('connection', (ws, req) => {
 });
 
 if (require.main === module) {
-  const host = process.env.HOST || 'horrorchatsite.local';
+  const host = process.env.HOST || 'localhost';
   const port = Number(process.env.PORT) || 3000;
   server.listen(port, host, () => {
     console.log(`Horror chat quest site listening on http://${host}:${port}`);
@@ -783,5 +783,3 @@ if (require.main === module) {
 }
 
 module.exports = { server, app, wss };
-
-module.exports = { app, server };
